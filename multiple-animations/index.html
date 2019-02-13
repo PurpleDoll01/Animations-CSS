@@ -8,7 +8,7 @@
   <style>
     body {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       height: 100vh;
       color: white;
@@ -32,8 +32,8 @@
       align-items: center;
       justify-content: center;
       animation-name: cuadrado, rebote;
-      animation-duration: 3s, 300ms;
-      animation-iteration-count: infinite;
+      animation-duration: 3s, .3s;
+      animation-iteration-count: infinite, 20;
       animation-timing-function: linear, ease-in-out;
       animation-direction: alternate;
       animation-fill-mode: forwards;
@@ -47,6 +47,14 @@
         left: calc(100% - 240px);
       }
     }
+    @keyframes escalera {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(200px);
+      }
+    }
     @keyframes rebote {
       from {
         transform: translateY(0);
@@ -55,13 +63,39 @@
         transform: translateY(100px) scale(1, 0.8);
       }
     }
+    @keyframes rebote2 {
+      from {
+        transform: translateY(300px);
+      }
+      to {
+        transform: translateY(400px) scale(1, 0.8);
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="cuadrado">
+    <div class="cuadrado" id="cuadrado">
       Hola mundo!
     </div>
   </div>
+  <script>
+    const $cuadrado = document.getElementById('cuadrado');
+    const $count = 400;
+    $cuadrado.addEventListener('animationend', (event) => {
+      console.log(event);
+      if (event.animationName === 'rebote') {
+        $cuadrado.style.animationName = 'escalera';
+        $cuadrado.style.animationDuration = '3s';
+        $cuadrado.style.animationIterationCount = '1';
+        $cuadrado.style.animationFillMode = 'forwards';
+      }
+      if (event.animationName === 'escalera') {
+        $cuadrado.style.animationName = 'cuadrado, rebote';
+        $cuadrado.style.animationDuration = '3s, .3s';
+        $cuadrado.style.animationIterationCount = 'infinite, 20';
+      }
+    });
+  </script>
 </body>
 </html>
