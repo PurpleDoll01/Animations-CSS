@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Transform origin</title>
+  <style>
+    body {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      font-family: Arial;
+      perspective: 200px;
+    }
+    .container {
+      border: 1px solid red;
+      width: 100%
+    }
+    .container:hover .cuadrado {
+      animation-play-state: paused;
+    }
+    .cuadrado {
+      width: 200px;
+      height: 200px;
+      background: red;
+      margin: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* animation-name: cuadrado, rebote; */
+      /* animation-duration: 3s, .3s; */
+      animation-iteration-count: infinite, 20;
+      animation-timing-function: linear, ease-in-out;
+      animation-direction: alternate;
+      animation-fill-mode: forwards;
+      position: relative;
+      transition: .3s;
+      will-change: opacity;
+    }
+    .cuadrado:hover {
+      opacity: 0;
+    }
+    @keyframes cuadrado {
+      0% {
+        left: 0;
+      }
+      100% {
+        left: calc(100% - 240px);
+      }
+    }
+    @keyframes escalera {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(200px);
+      }
+    }
+    @keyframes rebote {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(100px) scale(1, 0.8);
+      }
+    }
+    @keyframes rebote2 {
+      from {
+        transform: translateY(300px);
+      }
+      to {
+        transform: translateY(400px) scale(1, 0.8);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="cuadrado" id="cuadrado">
+      Hola mundo!
+    </div>
+  </div>
+  <script>
+    const $cuadrado = document.getElementById('cuadrado');
+    const $count = 400;
+    $cuadrado.addEventListener('animationend', (event) => {
+      console.log(event);
+      if (event.animationName === 'rebote') {
+        $cuadrado.style.animationName = 'escalera';
+        $cuadrado.style.animationDuration = '3s';
+        $cuadrado.style.animationIterationCount = '1';
+        $cuadrado.style.animationFillMode = 'forwards';
+      }
+      if (event.animationName === 'escalera') {
+        $cuadrado.style.animationName = 'cuadrado, rebote';
+        $cuadrado.style.animationDuration = '3s, .3s';
+        $cuadrado.style.animationIterationCount = 'infinite, 20';
+      }
+    });
+  </script>
+</body>
+</html>
