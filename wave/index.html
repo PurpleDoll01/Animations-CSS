@@ -9,38 +9,71 @@
     body {
       margin: 0;
     }
-    .circle {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: rgba(0,0,0, .5);
-      position: absolute;
-      animation: 5s wave infinite alternate;
-    }
-    .circle.b {
-      animation-delay: 1s;
-    }
-    .circle.c {
-      animation-delay: 2s;
-    }
     .container {
+      height: 500px;
+      background: #0f9bf6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
+    }
+    .content {
+      font-family: Arial;
+      text-align: center;
+      font-size: 2em;
+      color: rgba(255,255,255, .8);
+    }
+    .waves {
+      position: absolute;
+      bottom: -135px;
+      height: 527px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .wave {
+      position: absolute;
+      left: -180px;
+      bottom: 0;
+      height: 427px;
+      width: 2402px;
+      background: url(waves.png) center bottom no-repeat;
+      animation: 5s wave ease-in-out infinite alternate;
+    }
+    .wave.a {
+      background-position: 0 -854px;
+    }
+    .wave.b {
+      background-position: 0 -427px;
+      animation-delay: .6s;
+    }
+    .wave.c {
+      background-position: 0 0;
+      animation-delay: 1.2s;
     }
     @keyframes wave {
       0% {
-        transform: translateX(0) translateY(0);
+        transform: translate(0,0);
+      }
+      50% {
+        transform: translate(-80px, 30px);
       }
       100% {
-        transform: translateX(200px) translateY(100px);
+        transform: translate(160px, -60px);
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="circle a"></div>
-    <div class="circle b"></div>
-    <div class="circle c"></div>
+    <div class="content">
+      <h1>Hello World!</h1>
+      <p>I love Platzi even tho I miss mi ex girlfriend u.u</p>
+    </div>
+    <div class="waves">
+      <div class="wave wave a"></div>
+      <div class="wave wave b"></div>
+      <div class="wave wave c"></div>
+    </div>
   </div>
 </body>
 </html>
